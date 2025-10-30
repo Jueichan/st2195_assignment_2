@@ -1,0 +1,29 @@
+---
+title: "ST2195 Assignment 2 – Web Scraping in R"
+author: "JueiSheng"
+output: html_document
+---
+
+## Introduction
+This R Markdown document demonstrates how to scrape the CSV example table from  
+Wikipedia’s *Delimiter-separated values* page using the `rvest` package.
+
+## Step 1 – Load Packages
+```{r}
+library(rvest)
+```
+
+## Step 2 – Read and Parse the Page
+```{r}
+url <- "https://en.wikipedia.org/wiki/Delimiter-separated_values"
+page <- read_html(url)
+tables <- html_table(page, fill = TRUE)
+head(tables[[1]])
+```
+
+## Step 3 – Save as CSV
+```{r}
+write.csv(tables[[1]], "csv_example_r.csv", row.names = FALSE)
+```
+
+The file **csv_example_r.csv** is now saved in your local folder.
